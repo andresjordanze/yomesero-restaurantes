@@ -75,6 +75,14 @@ public class ItemFormActivity extends ActionBarActivity {
             startActivity(intent);
             finish();
         }
+        if (id == R.id.action_display_orders){
+            Intent intent = new Intent(getApplicationContext(),DisplayOrdersActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_activity_main){
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -13,6 +13,7 @@
     <string name="create_button">Crear item</string>
     <string name="add_item_button">Agregar item</string>
     <string name="title_activity_display_item">Item Created</string>
+    <string name="display_orders">Ver pedidos</string>
 
     <string-array name="types">
         <item>Comida</item>
@@ -28,4 +29,7 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_display_orders">Lista de pedidos</string>
+    <string name="title_activity_order_list">orderList</string>
+    <string name="title_activity_show_order">ShowOrderActivity</string>
 </resources>
