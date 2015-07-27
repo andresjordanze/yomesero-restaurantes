@@ -345,7 +345,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected Boolean doInBackground(Void... params) {
             InputStream inputStream = null;
-            String url = "https://frozen-springs-8168.herokuapp.com/verify_password?username="+mEmail+"&password="+mPassword;
+            String url = "https://yomeseroapi.herokuapp.com/verify_restaurant_password?username="+mEmail+"&password="+mPassword;
             String result = "";
             try {
                 HttpClient httpClient = new DefaultHttpClient();
@@ -369,7 +369,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     Log.d("Valor leido", "No inicio sesion");
                     return false;
                 }else {
-                    id = obj.getString("email");
+                    id = obj.getString("id");
                     Log.d("Valor leido", obj.toString());
                     return true;
                 }
