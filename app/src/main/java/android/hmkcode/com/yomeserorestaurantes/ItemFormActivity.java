@@ -98,6 +98,8 @@ public class ItemFormActivity extends ActionBarActivity {
         message += item_time.getText().toString();
         message += "&item_price=";
         message += item_price.getText().toString();
+        message += "&restaurant_id=";
+        message += SaveSharedPreference.getUserRest(this);
         message += "&item_image=";
         message += encode_image;
         Log.d("Mensaje url", message);

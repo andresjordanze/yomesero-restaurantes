@@ -15,6 +15,7 @@ public class Item {
     public int item_time;
     public float item_price;
     public String item_image;
+    public int restaurant_id;
 
     public String toJSON(){
         try {
@@ -24,6 +25,7 @@ public class Item {
             jsonObject.put("item_type", item_type);
             jsonObject.put("item_time", item_time);
             jsonObject.put("item_price", item_price);
+            jsonObject.put("restaurant_id", restaurant_id);
             jsonObject.put("item_image", item_image);
             return jsonObject.toString();
         }catch(Exception e){
@@ -39,6 +41,7 @@ public class Item {
             item_type = jsonObject.getString("item_type");
             item_time = Integer.parseInt(jsonObject.getString("item_time"));
             item_price = Float.parseFloat(jsonObject.getString("item_price"));
+            restaurant_id = Integer.parseInt(jsonObject.getString("restaurant_id"));
             item_image = jsonObject.getString("item_image");
             return show();
         }catch(Exception e){
@@ -54,6 +57,7 @@ public class Item {
             item_type = json.getString("item_type");
             item_time = Integer.parseInt(json.getString("item_time"));
             item_price = Float.parseFloat(json.getString("item_price"));
+            restaurant_id = Integer.parseInt(json.getString("restaurant_id"));
             item_image = json.getString("item_image");
         } catch (JSONException e) {
             e.printStackTrace();
