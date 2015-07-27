@@ -76,6 +76,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         setContentView(R.layout.activity_login);
 
         if (SaveSharedPreference.getUserId(LoginActivity.this).length()!=0){
+            Log.d("ID del restaurante:", SaveSharedPreference.getUserRest(LoginActivity.this));
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
             finish();
@@ -391,7 +392,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 SaveSharedPreference.setUserId(LoginActivity.this,id);
                 SaveSharedPreference.setUserRest(LoginActivity.this,rest);
                 Log.d("USUARIO: ", id);
-                Log.d("RESTAURANTE: ",rest);
+                Log.d("RESTAURANTE: ",SaveSharedPreference.getUserRest(LoginActivity.this));
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
                 finish();

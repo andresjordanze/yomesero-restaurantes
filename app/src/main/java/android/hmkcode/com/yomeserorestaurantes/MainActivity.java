@@ -69,6 +69,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             startActivity(intent);
             finish();
         }
+        if (id == R.id.action_create_user){
+            Intent intent = new Intent(getApplicationContext(),CreateUserActivity.class);
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
