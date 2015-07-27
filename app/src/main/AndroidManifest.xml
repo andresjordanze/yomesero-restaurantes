@@ -41,12 +41,12 @@
             android:label="@string/title_activity_display_orders" >
         </activity>
         <activity
-            android:name=".orderList"
-            android:label="@string/title_activity_order_list" >
-        </activity>
-        <activity
-            android:name=".ShowOrderActivity"
-            android:label="@string/title_activity_show_order" >
+            android:name=".CreateUserActivity"
+            android:label="@string/title_activity_create_user"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.hmkcode.com.yomeserorestaurantes.MainActivity" />
         </activity>
     </application>
 
