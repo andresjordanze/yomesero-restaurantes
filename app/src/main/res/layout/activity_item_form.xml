@@ -1,0 +1,118 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:id="@+id/imgViewItemImage"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/no_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nombre"
+        android:id="@+id/textView2" />
+
+    <EditText
+        android:id="@+id/item_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_name_message"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:layout_gravity="center_horizontal"
+        android:autoText="false"
+        android:backgroundTint="#52A1BF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Descripción"
+        android:id="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/item_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_description_message"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#52A1BF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tipo"
+        android:id="@+id/textView4" />
+
+    <Spinner
+        android:id="@+id/item_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/types"
+        android:padding="18dp" />
+
+    <!--EditText
+        android:id="@+id/item_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_type_message"
+        android:inputType="textCapSentences|textAutoCorrect"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#52A1BF" /-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tiempo"
+        android:id="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/item_time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_time_message"
+        android:inputType="phone"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#52A1BF" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Precio"
+        android:id="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/item_price"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/item_price_message"
+        android:inputType="phone"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#52A1BF" />
+
+    <Button
+        android:layout_width="189dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_button"
+        android:onClick="createItem"
+        android:background="#ff198642"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp" />
+</LinearLayout>
+</ScrollView>
