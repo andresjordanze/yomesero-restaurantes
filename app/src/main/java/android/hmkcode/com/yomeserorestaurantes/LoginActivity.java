@@ -57,6 +57,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     public static String id;
 
+    public static String rest;
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -370,6 +372,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     return false;
                 }else {
                     id = obj.getString("id");
+                    rest = obj.getString("rest");
                     Log.d("Valor leido", obj.toString());
                     return true;
                 }
@@ -386,7 +389,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 SaveSharedPreference.setUserId(LoginActivity.this,id);
-                Log.d("USUARIO: ",id);
+                SaveSharedPreference.setUserRest(LoginActivity.this,rest);
+                Log.d("USUARIO: ", id);
+                Log.d("RESTAURANTE: ",rest);
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
                 finish();
