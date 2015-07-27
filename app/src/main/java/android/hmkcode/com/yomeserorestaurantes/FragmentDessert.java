@@ -31,6 +31,7 @@ public class FragmentDessert extends Fragment {
     View rootView;
     Context context;
     ListView itemsListView;
+    int current_rest;
 
     public FragmentDessert(Context context){
         this.context = context;
@@ -54,7 +55,7 @@ public class FragmentDessert extends Fragment {
                 for (int i = 0; i < json_items.length(); i++) {
                     aux = new Item();
                     aux.parseFromJson(json_items.getJSONObject(i));
-                    if (aux.item_type.equals("Postre")){
+                    if (current_rest == aux.restaurant_id && aux.item_type.equals("Postre")){
                         items.add(aux);
                     }
                 }
@@ -103,6 +104,7 @@ public class FragmentDessert extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_dessert, container, false);
         itemsListView = (ListView) rootView.findViewById(R.id.itemsListView);
+        current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
         new HttpAsyncTask(context).execute("https://yomeseroapi.herokuapp.com/items.json");
         return rootView;
     }

@@ -2,13 +2,11 @@ package android.hmkcode.com.yomeserorestaurantes;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
@@ -17,8 +15,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class ItemFormActivity extends ActionBarActivity {
@@ -73,22 +80,12 @@ public class ItemFormActivity extends ActionBarActivity {
     }
 
     public void createItem(View view){
-        Intent intent = new Intent(this, DisplayItemActivity.class);
+
         EditText item_name = (EditText) findViewById(R.id.item_name);
         EditText item_description = (EditText) findViewById(R.id.item_description);
         Spinner item_type = (Spinner) findViewById(R.id.item_type);
         EditText item_time = (EditText) findViewById(R.id.item_time);
         EditText item_price = (EditText) findViewById(R.id.item_price);
-
-        /*Bitmap resized = Bitmap.createScaledBitmap(bitmap, 50, 50, true);
-        ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        resized.compress(Bitmap.CompressFormat.PNG, 100, bao);
-        byte [] ba = bao.toByteArray();
-        String encode_image=Base64.encodeToString(ba,Base64.DEFAULT);
-        encode_image = encode_image.replace("+","_");
-        encode_image = encode_image.replace("\n", "");
-        encode_image = encode_image.replace(" ", "");
-        Log.d("encodeimage", encode_image);*/
 
         String message="https://yomeseroapi.herokuapp.com/create_from_json?";
         message += "item_name=";
@@ -101,11 +98,38 @@ public class ItemFormActivity extends ActionBarActivity {
         message += item_time.getText().toString();
         message += "&item_price=";
         message += item_price.getText().toString();
+        message += "&restaurant_id=";
+        message += SaveSharedPreference.getUserRest(this);
         message += "&item_image=";
         message += encode_image;
         Log.d("Mensaje url", message);
-        intent.putExtra(EXTRA_MESSAGE,message);
-        startActivity(intent);
+
+        message = message.replaceAll(" ","%20");
+        message = message.replaceAll("\n", "");
+        new HttpAsyncTask().execute(message);
+
+        Intent intent1 = new Intent(this,MainActivity.class);
+        startActivity(intent1);
+    }
+
+    private class HttpAsyncTask extends AsyncTask<String,Void,String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            HttpResponse response = null;
+            try {
+                HttpClient client = new DefaultHttpClient();
+                HttpGet request = new HttpGet();
+                request.setURI(new URI(urls[0]));
+                response = client.execute(request);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
     }
 
     public void onActivityResult(int reqCode, int resCode, Intent data) {

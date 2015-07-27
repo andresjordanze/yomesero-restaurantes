@@ -28,15 +28,16 @@ public class FragmentFood extends Fragment {
     View rootView;
     Context context;
     ListView itemsListView;
-
     public FragmentFood(Context context){
         this.context = context;
     }
+    int current_rest;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_food, container, false);
         itemsListView = (ListView) rootView.findViewById(R.id.itemsListView);
+        current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
         new HttpAsyncTask(context).execute("https://yomeseroapi.herokuapp.com/items.json");
         return rootView;
     }
@@ -59,7 +60,7 @@ public class FragmentFood extends Fragment {
                 for (int i = 0; i < json_items.length(); i++) {
                     aux = new Item();
                     aux.parseFromJson(json_items.getJSONObject(i));
-                    if (aux.item_type.equals("Comida")){
+                    if (current_rest == aux.restaurant_id && aux.item_type.equals("Comida")){
                         items.add(aux);
                     }
                 }
