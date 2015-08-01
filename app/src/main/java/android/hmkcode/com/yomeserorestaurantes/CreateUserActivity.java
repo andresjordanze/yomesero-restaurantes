@@ -102,7 +102,7 @@ public class CreateUserActivity extends ActionBarActivity {
         protected Boolean doInBackground(Void... params){
             InputStream inputStream = null;
             String result="";
-            String url = "https://yomeseroapi.herokuapp.com/create_user_json?email="+email+"&password="+password+"&password_confirmation="+password_confirmation+"&rest="+id;
+            String url = "https://yomeseroserver.herokuapp.com/create_user_json?email="+email+"&password="+password+"&password_confirmation="+password_confirmation+"&rest="+id;
             try{
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpResponse httpResponse = httpClient.execute(new HttpGet(url));

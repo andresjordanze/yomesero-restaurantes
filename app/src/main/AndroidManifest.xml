@@ -41,6 +41,10 @@
             android:label="@string/title_activity_display_orders" >
         </activity>
         <activity
+            android:name=".ShowOrderActivity"
+            android:label="Mostrar pedido" >
+        </activity>
+        <activity
             android:name=".CreateUserActivity"
             android:label="@string/title_activity_create_user"
             android:parentActivityName=".MainActivity" >

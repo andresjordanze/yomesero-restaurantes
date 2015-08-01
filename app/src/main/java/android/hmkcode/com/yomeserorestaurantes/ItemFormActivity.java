@@ -95,7 +95,7 @@ public class ItemFormActivity extends ActionBarActivity {
         EditText item_time = (EditText) findViewById(R.id.item_time);
         EditText item_price = (EditText) findViewById(R.id.item_price);
 
-        String message="https://yomeseroapi.herokuapp.com/create_from_json?";
+        String message="https://yomeseroserver.herokuapp.com/create_from_json?";
         message += "item_name=";
         message += item_name.getText().toString();
         message += "&item_description=";

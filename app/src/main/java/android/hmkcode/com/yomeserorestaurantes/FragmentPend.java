@@ -98,7 +98,7 @@ public class FragmentPend extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_fragment_entr, container, false);
         ordersListView = (ListView) rootView.findViewById(R.id.ordersListView);
         current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
-        new HttpAsyncTask(context).execute("https://yomeseroapi.herokuapp.com/ordens.json");
+        new HttpAsyncTask(context).execute("https://yomeseroserver.herokuapp.com/ordens.json");
         return rootView;
     }
 

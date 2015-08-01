@@ -38,7 +38,7 @@ public class FragmentFood extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_food, container, false);
         itemsListView = (ListView) rootView.findViewById(R.id.itemsListView);
         current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
-        new HttpAsyncTask(context).execute("https://yomeseroapi.herokuapp.com/items.json");
+        new HttpAsyncTask(context).execute("https://yomeseroserver.herokuapp.com/items.json");
         return rootView;
     }
 

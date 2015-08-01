@@ -18,7 +18,7 @@ public class MyOrdersAdapter extends ArrayAdapter<Order> {
     private ArrayList<Order> orders;
 
     public MyOrdersAdapter(Context context, ArrayList<Order> orders) {
-        super(context, R.layout.order_file, orders);
+        super(context, R.layout.order_list, orders);
         this.context = context;
         this.orders = orders;
     }
@@ -27,29 +27,16 @@ public class MyOrdersAdapter extends ArrayAdapter<Order> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.order_file, parent, false);
+        View rowView = inflater.inflate(R.layout.order_list, parent, false);
         TextView number = (TextView) rowView.findViewById(R.id.number);
         TextView textView = (TextView) rowView.findViewById(R.id.mesaView);
         TextView textView2 = (TextView) rowView.findViewById(R.id.stateView);
         TextView textView3 = (TextView) rowView.findViewById(R.id.totalView);
 
-        ArrayList<String> numbers = new ArrayList<>();
-        ArrayList<String> totals = new ArrayList<>();
-        ArrayList<String> states = new ArrayList<>();
-        ArrayList<String> mesas = new ArrayList<>();
-
-        for (int i = 0; i < orders.size(); i++) {
-
-            numbers.add(""+orders.get(i).id);
-            totals.add("Total:"+orders.get(i).consumo);
-            states.add("Estado:"+orders.get(i).estado);
-            mesas.add("Mesa nº:"+orders.get(i).mesa);
-        }
-
-        number.setText(numbers.get(position));
-        textView.setText(totals.get(position));
-        textView2.setText(states.get(position));
-        textView3.setText(mesas.get(position));
+        number.setText(Integer.toString(orders.get(position).id));
+        textView.setText(Float.toString(orders.get(position).consumo));
+        textView2.setText(orders.get(position).estado);
+        textView3.setText(Integer.toString(orders.get(position).mesa));
         return rowView;
     }
 }

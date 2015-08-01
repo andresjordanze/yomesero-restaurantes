@@ -17,6 +17,7 @@ public class Item {
     public String item_image;
     public int restaurant_id;
     public int quantity;
+    public int id;
 
     public String toJSON(){
         try {
@@ -65,6 +66,17 @@ public class Item {
         }
     }
 
+    public void getOrdenItem(JSONObject json){
+        try {
+            item_name = json.getString("item_name");
+            item_image = json.getString("item_image");
+            quantity = Integer.parseInt(json.getString("cantidad"));
+            id = Integer.parseInt(json.getString("orden_id"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     public String show(){
         String result="";
         result += item_name;
@@ -76,6 +88,6 @@ public class Item {
 
     @Override
     public String toString(){
-        return "Name: "+item_name+"\n"+"Type: "+item_type+"\n"+"Time: "+Integer.toString(item_time)+"\n"+"Price: "+Float.toString(item_price);
+        return "Name: "+item_name+"\n"+"Quantity: "+Integer.toString(quantity)+"\n"+"Id: "+Integer.toString(id);
     }
 }

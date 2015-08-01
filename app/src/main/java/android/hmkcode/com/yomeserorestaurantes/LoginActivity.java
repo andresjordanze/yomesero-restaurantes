@@ -348,7 +348,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected Boolean doInBackground(Void... params) {
             InputStream inputStream = null;
-            String url = "https://yomeseroapi.herokuapp.com/verify_restaurant_password?username="+mEmail+"&password="+mPassword;
+            String url = "https://yomeseroserver.herokuapp.com/verify_restaurant_password?username="+mEmail+"&password="+mPassword;
             String result = "";
             try {
                 HttpClient httpClient = new DefaultHttpClient();

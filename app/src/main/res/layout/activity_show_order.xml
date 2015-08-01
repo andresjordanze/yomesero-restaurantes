@@ -7,26 +7,8 @@
     android:orientation="vertical"
     tools:context="android.hmkcode.com.yomeserorestaurantes.ShowOrderActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Total Bs."
-        android:gravity="center"
-        android:id="@+id/totalOrder"
-        android:textColor="#32495A"
-        android:textSize="25sp"
-        android:layout_marginBottom="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/orderItemsListView"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/relativeLayout" />
+        android:id="@+id/orderItemsListView" />
 </LinearLayout>

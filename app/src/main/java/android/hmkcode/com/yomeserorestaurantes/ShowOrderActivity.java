@@ -26,13 +26,14 @@ import java.util.ArrayList;
 
 public class ShowOrderActivity extends ActionBarActivity {
     Order order;
-    ListView ordenItemListView;
+    ListView orderItemsListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_order);
-        order = (Order) getIntent().getSerializableExtra("name");
-        new HttpAsyncTask(this).execute("https://yomeseroapi.herokuapp.com/getOrdenItems?id="+order.id);
+        order = (Order) getIntent().getSerializableExtra("order");
+        orderItemsListView = (ListView) findViewById(R.id.orderItemsListView);
+        new HttpAsyncTask(this).execute("https://yomeseroserver.herokuapp.com/getOrdenItems?id="+order.id);
     }
 
     private class HttpAsyncTask extends AsyncTask<String,Void,String> {
@@ -52,11 +53,11 @@ public class ShowOrderActivity extends ActionBarActivity {
                 Item aux;
                 for (int i = 0; i < json_items.length(); i++) {
                     aux = new Item();
-                    aux.parseFromJson(json_items.getJSONObject(i));
-                        items.add(aux);
+                    aux.getOrdenItem(json_items.getJSONObject(i));
+                    items.add(aux);
                 }
-                MyArrayAdapter myArrayAdapter = new MyArrayAdapter(context,items);
-                ordenItemListView.setAdapter(myArrayAdapter);
+                MyOrderItemAdapter myOrderItemAdapter = new MyOrderItemAdapter(context,items);
+                orderItemsListView.setAdapter(myOrderItemAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -114,11 +115,10 @@ public class ShowOrderActivity extends ActionBarActivity {
             startActivity(intent);
             finish();
         }
-        if (id == R.id.action_display_orders){
-            Intent intent = new Intent(getApplicationContext(),DisplayOrdersActivity.class);
+        if (id == R.id.action_activity_main){
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
