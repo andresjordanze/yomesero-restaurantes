@@ -37,6 +37,6 @@
     <string name="title_activity_display_orders">Lista de pedidos</string>
     <string name="title_activity_order_list">orderList</string>
     <string name="title_activity_show_order">ShowOrderActivity</string>
-    <string name="title_activity_create_user">CreateUserActivity</string>
+    <string name="title_activity_create_user">Registrar Usuario</string>
 
 </resources>
