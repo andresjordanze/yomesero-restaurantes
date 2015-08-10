@@ -19,9 +19,11 @@
         android:text="Pedido"
         android:id="@+id/firstLine"
         android:textColor="#6FA8DC"
-        android:layout_above="@+id/secondLine"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/img"
-        android:layout_toEndOf="@+id/img" />
+        android:layout_toEndOf="@+id/img"
+        android:textSize="18sp"
+        android:textIsSelectable="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,8 +32,7 @@
         android:text="Medium Text"
         android:id="@+id/secondLine"
         android:textColor="#ff303130"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/img"
-        android:layout_toEndOf="@+id/img" />
+        android:layout_below="@+id/firstLine"
+        android:layout_toRightOf="@+id/img" />
 
 </RelativeLayout>

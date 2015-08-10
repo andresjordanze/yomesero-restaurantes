@@ -39,6 +39,9 @@ public class DisplayOrdersActivity extends ActionBarActivity implements ActionBa
         tab = actionBar.newTab().setText("Entregados").setTabListener(this);
         actionBar.addTab(tab);
 
+        tab = actionBar.newTab().setText("Por cobrar").setTabListener(this);
+        actionBar.addTab(tab);
+
         //ActionBar bar = getSupportActionBar();
         //bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#128371")));
 
@@ -87,12 +90,14 @@ public class DisplayOrdersActivity extends ActionBarActivity implements ActionBa
                     return new FragmentProd(getApplicationContext());
                 case 2:
                     return new FragmentEntr(getApplicationContext());
+                case 3:
+                    return new FragmentCobr(getApplicationContext());
                 default:
                     return null;
             }
         }
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 
