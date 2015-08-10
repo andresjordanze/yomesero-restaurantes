@@ -56,8 +56,8 @@ public class ShowOrderActivity extends ActionBarActivity {
                     aux.getOrdenItem(json_items.getJSONObject(i));
                     items.add(aux);
                 }
-                MyOrderItemAdapter myOrderItemAdapter = new MyOrderItemAdapter(context,items);
-                orderItemsListView.setAdapter(myOrderItemAdapter);
+                OrderItemAdapter orderItemAdapter = new OrderItemAdapter(context,items);
+                orderItemsListView.setAdapter(orderItemAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -117,6 +117,10 @@ public class ShowOrderActivity extends ActionBarActivity {
         }
         if (id == R.id.action_activity_main){
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+        }
+        if (id == R.id.action_display_cash) {
+            Intent intent = new Intent(getApplicationContext(), DisplayCashActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

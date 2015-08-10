@@ -28,14 +28,14 @@ import java.util.ArrayList;
 /**
  * Created by Andres on 10/08/2015.
  */
-public class FragmentCobr extends Fragment {
+public class FragmentCashed extends Fragment {
     View rootView;
     Context context;
     ListView ordersListView;
     int current_rest;
     ArrayList<Order> orders;
 
-    public FragmentCobr(Context context){
+    public FragmentCashed(Context context){
         this.context = context;
     }
 
@@ -57,20 +57,12 @@ public class FragmentCobr extends Fragment {
                 for (int i = 0; i < json_orders.length(); i++) {
                     aux = new Order();
                     aux.parseFromJson(json_orders.getJSONObject(i));
-                    if (current_rest == aux.rest && aux.estado.equals("Por cobrar")){
+                    if (current_rest == aux.rest && aux.estado.equals("Cobrado")){
                         orders.add(aux);
                     }
                 }
-                MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(context,orders);
-                ordersListView.setAdapter(myOrdersAdapter);
-                ordersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(context, ShowOrderActivity.class);
-                        intent.putExtra("order", orders.get(position));
-                        startActivity(intent);
-                    }
-                });
+                CashAdapter cashAdapter = new CashAdapter(context,orders);
+                ordersListView.setAdapter(cashAdapter);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -108,12 +100,11 @@ public class FragmentCobr extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_fragment_entr, container, false);
+        rootView = inflater.inflate(R.layout.fragment_cashed, container, false);
         ordersListView = (ListView) rootView.findViewById(R.id.ordersListView);
         current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
         new HttpAsyncTask(context).execute("https://yomeseroserver.herokuapp.com/ordens.json");
         return rootView;
     }
-
 
 }

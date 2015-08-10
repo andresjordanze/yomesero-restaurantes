@@ -41,6 +41,10 @@
             android:label="@string/title_activity_display_orders" >
         </activity>
         <activity
+            android:name=".DisplayCashActivity"
+            android:label="Caja" >
+        </activity>
+        <activity
             android:name=".ShowOrderActivity"
             android:label="Mostrar pedido" >
         </activity>
@@ -51,6 +55,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.hmkcode.com.yomeserorestaurantes.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ShowCashActivity"
+            android:label="@string/title_activity_show_cash" >
         </activity>
     </application>
 

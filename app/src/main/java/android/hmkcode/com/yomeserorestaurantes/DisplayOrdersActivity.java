@@ -39,9 +39,6 @@ public class DisplayOrdersActivity extends ActionBarActivity implements ActionBa
         tab = actionBar.newTab().setText("Entregados").setTabListener(this);
         actionBar.addTab(tab);
 
-        tab = actionBar.newTab().setText("Por cobrar").setTabListener(this);
-        actionBar.addTab(tab);
-
         //ActionBar bar = getSupportActionBar();
         //bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#128371")));
 
@@ -73,6 +70,11 @@ public class DisplayOrdersActivity extends ActionBarActivity implements ActionBa
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
         }
+
+        if (id == R.id.action_display_cash) {
+            Intent intent = new Intent(getApplicationContext(), DisplayCashActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -85,19 +87,17 @@ public class DisplayOrdersActivity extends ActionBarActivity implements ActionBa
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new FragmentPend(getApplicationContext());
+                    return new FragmentPending(getApplicationContext());
                 case 1:
-                    return new FragmentProd(getApplicationContext());
+                    return new FragmentInProcess(getApplicationContext());
                 case 2:
-                    return new FragmentEntr(getApplicationContext());
-                case 3:
-                    return new FragmentCobr(getApplicationContext());
+                    return new FragmentDelivered(getApplicationContext());
                 default:
                     return null;
             }
         }
         public int getCount() {
-            return 4;
+            return 3;
         }
     }
 

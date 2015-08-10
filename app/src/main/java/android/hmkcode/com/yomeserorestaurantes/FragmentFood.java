@@ -64,8 +64,8 @@ public class FragmentFood extends Fragment {
                         items.add(aux);
                     }
                 }
-                MyArrayAdapter myArrayAdapter = new MyArrayAdapter(context,items);
-                itemsListView.setAdapter(myArrayAdapter);
+                ItemsArrayAdapter itemsArrayAdapter = new ItemsArrayAdapter(context,items);
+                itemsListView.setAdapter(itemsArrayAdapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

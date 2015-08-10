@@ -18,12 +18,12 @@ import java.util.ArrayList;
 /**
  * Created by Andres on 01/08/2015.
  */
-public class MyOrderItemAdapter extends ArrayAdapter<Item> {
+public class OrderItemAdapter extends ArrayAdapter<Item> {
     private final Context context;
     private ArrayList<Item> items;
 
-    public MyOrderItemAdapter(Context context, ArrayList<Item> items) {
-        super(context, R.layout.order_item_view, items);
+    public OrderItemAdapter(Context context, ArrayList<Item> items) {
+        super(context, R.layout.order_item_list, items);
         this.context = context;
         this.items = items;
     }
@@ -32,7 +32,7 @@ public class MyOrderItemAdapter extends ArrayAdapter<Item> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.order_item_view, parent, false);
+        View rowView = inflater.inflate(R.layout.order_item_list, parent, false);
         TextView item_name = (TextView) rowView.findViewById(R.id.firstLine);
         TextView quantity = (TextView) rowView.findViewById(R.id.secondLine);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);

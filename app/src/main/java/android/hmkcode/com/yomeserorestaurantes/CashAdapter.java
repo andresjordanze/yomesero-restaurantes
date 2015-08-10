@@ -1,8 +1,5 @@
 package android.hmkcode.com.yomeserorestaurantes;
 
-/**
- * Created by Andres on 27/07/2015.
- */
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -25,16 +22,15 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import static android.support.v4.app.ActivityCompat.startActivity;
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
-
-
-public class MyOrdersAdapter extends ArrayAdapter<Order> {
+/**
+ * Created by Andres on 10/08/2015.
+ */
+public class CashAdapter extends ArrayAdapter<Order> {
     private final Context context;
     private ArrayList<Order> orders;
 
-    public MyOrdersAdapter(Context context, ArrayList<Order> orders) {
-        super(context, R.layout.order_list, orders);
+    public CashAdapter(Context context, ArrayList<Order> orders) {
+        super(context, R.layout.cash_list, orders);
         this.context = context;
         this.orders = orders;
     }
@@ -43,10 +39,11 @@ public class MyOrdersAdapter extends ArrayAdapter<Order> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.order_list, parent, false);
-        TextView number = (TextView) rowView.findViewById(R.id.number);
+        View rowView = inflater.inflate(R.layout.cash_list, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.mesaView);
-        TextView textView3 = (TextView) rowView.findViewById(R.id.totalView);
+        TextView textView3 = (TextView) rowView.findViewById(R.id.number);
+        TextView nitView = (TextView) rowView.findViewById(R.id.nitView);
+        TextView nameView = (TextView) rowView.findViewById(R.id.nameView);
         String state = orders.get(position).estado;
         Integer id = orders.get(position).id;
 
@@ -56,10 +53,10 @@ public class MyOrdersAdapter extends ArrayAdapter<Order> {
         plus.setOnClickListener(listener);
         minus.setOnClickListener(listener);
 
-        number.setText(Integer.toString(orders.get(position).id));
         textView.setText(Float.toString(orders.get(position).consumo));
         textView3.setText(Integer.toString(orders.get(position).mesa));
-
+        nitView.setText(Integer.toString(orders.get(position).nit));
+        nameView.setText(orders.get(position).name);
 
         return rowView;
     }
@@ -78,37 +75,21 @@ public class MyOrdersAdapter extends ArrayAdapter<Order> {
         public void onClick(View v) {
 
             if (v.getId() == R.id.checkbutton) {
-                if (state.equals("Pendiente")){
-                    message="https://yomeseroserver.herokuapp.com/update_from_json?id="+id+"&state=En%20Proceso";
+                if(state.equals("Por cobrar")){
+                    message="https://yomeseroserver.herokuapp.com/update_from_json?id="+id+"&state=Cobrado";
                     Log.d("Mensaje", message);
                     new HttpAsyncTask().execute(message);
-                    Intent intent1 = new Intent(context, DisplayOrdersActivity.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent1);
-                }
-                else if(state.equals("En Proceso")){
-                    message="https://yomeseroserver.herokuapp.com/update_from_json?id="+id+"&state=Entregado";
-                    Log.d("Mensaje", message);
-                    new HttpAsyncTask().execute(message);
-                    Intent intent1 = new Intent(context, DisplayOrdersActivity.class);
+                    Intent intent1 = new Intent(context, DisplayCashActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 }
             }
             else{
-                if (state.equals("En Proceso")){
-                    message="https://yomeseroserver.herokuapp.com/update_from_json?id="+id+"&state=Pendiente";
+               if(state.equals("Cobrado")){
+                    message="https://yomeseroserver.herokuapp.com/update_from_json?id="+id+"&state=Por%20cobrar";
                     Log.d("Mensaje", message);
                     new HttpAsyncTask().execute(message);
-                    Intent intent1 = new Intent(context, DisplayOrdersActivity.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent1);
-                }
-                else if(state.equals("Entregado")){
-                    message="https://yomeseroserver.herokuapp.com/update_from_json?id="+id+"&state=En%20Proceso";
-                    Log.d("Mensaje", message);
-                    new HttpAsyncTask().execute(message);
-                    Intent intent1 = new Intent(context, DisplayOrdersActivity.class);
+                    Intent intent1 = new Intent(context, DisplayCashActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 }

@@ -17,6 +17,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,14 +25,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-public class FragmentProd extends Fragment {
+public class FragmentPending extends Fragment {
     View rootView;
     Context context;
     ListView ordersListView;
     int current_rest;
     ArrayList<Order> orders;
 
-    public FragmentProd(Context context){
+    public FragmentPending(Context context){
         this.context = context;
     }
 
@@ -53,12 +54,12 @@ public class FragmentProd extends Fragment {
                 for (int i = 0; i < json_orders.length(); i++) {
                     aux = new Order();
                     aux.parseFromJson(json_orders.getJSONObject(i));
-                    if (current_rest == aux.rest && aux.estado.equals("En Proceso")){
+                    if (current_rest == aux.rest && aux.estado.equals("Pendiente")){
                         orders.add(aux);
                     }
                 }
-                MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(context,orders);
-                ordersListView.setAdapter(myOrdersAdapter);
+                OrdersAdapter ordersAdapter = new OrdersAdapter(context,orders);
+                ordersListView.setAdapter(ordersAdapter);
                 ordersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,4 +113,5 @@ public class FragmentProd extends Fragment {
     }
 
 }
+
 

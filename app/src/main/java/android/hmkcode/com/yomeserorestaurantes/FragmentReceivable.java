@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -24,15 +25,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-
-public class FragmentPend extends Fragment {
+/**
+ * Created by Andres on 10/08/2015.
+ */
+public class FragmentReceivable extends Fragment {
     View rootView;
     Context context;
     ListView ordersListView;
     int current_rest;
     ArrayList<Order> orders;
 
-    public FragmentPend(Context context){
+    public FragmentReceivable(Context context){
         this.context = context;
     }
 
@@ -54,20 +57,12 @@ public class FragmentPend extends Fragment {
                 for (int i = 0; i < json_orders.length(); i++) {
                     aux = new Order();
                     aux.parseFromJson(json_orders.getJSONObject(i));
-                    if (current_rest == aux.rest && aux.estado.equals("Pendiente")){
+                    if (current_rest == aux.rest && aux.estado.equals("Por cobrar")){
                         orders.add(aux);
                     }
                 }
-                MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(context,orders);
-                ordersListView.setAdapter(myOrdersAdapter);
-                ordersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(context, ShowOrderActivity.class);
-                        intent.putExtra("order", orders.get(position));
-                        startActivity(intent);
-                    }
-                });
+                CashAdapter cashAdapter = new CashAdapter(context,orders);
+                ordersListView.setAdapter(cashAdapter);
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -105,7 +100,7 @@ public class FragmentPend extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_fragment_entr, container, false);
+        rootView = inflater.inflate(R.layout.fragment_receivable, container, false);
         ordersListView = (ListView) rootView.findViewById(R.id.ordersListView);
         current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
         new HttpAsyncTask(context).execute("https://yomeseroserver.herokuapp.com/ordens.json");
@@ -113,5 +108,3 @@ public class FragmentPend extends Fragment {
     }
 
 }
-
-

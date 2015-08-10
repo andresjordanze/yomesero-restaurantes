@@ -16,11 +16,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class MyArrayAdapter extends ArrayAdapter<Item> {
+public class ItemsArrayAdapter extends ArrayAdapter<Item> {
     private final Context context;
     private ArrayList<Item> items;
 
-    public MyArrayAdapter(Context context, ArrayList<Item> items) {
+    public ItemsArrayAdapter(Context context, ArrayList<Item> items) {
         super(context, R.layout.item_list, items);
         this.context = context;
         this.items = items;

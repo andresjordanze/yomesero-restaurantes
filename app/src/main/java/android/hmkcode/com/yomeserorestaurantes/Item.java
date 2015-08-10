@@ -19,38 +19,6 @@ public class Item {
     public int quantity;
     public int id;
 
-    public String toJSON(){
-        try {
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("item_name", item_name);
-            jsonObject.put("item_description", item_description);
-            jsonObject.put("item_type", item_type);
-            jsonObject.put("item_time", item_time);
-            jsonObject.put("item_price", item_price);
-            jsonObject.put("restaurant_id", restaurant_id);
-            jsonObject.put("item_image", item_image);
-            return jsonObject.toString();
-        }catch(Exception e){
-            Log.d("InputStream", e.getLocalizedMessage());
-        }
-        return null;
-    }
-    public String fromJSON(String data){
-        try{
-            JSONObject jsonObject = new JSONObject(data);
-            item_name = jsonObject.getString("item_name");
-            item_description = jsonObject.getString("item_description");
-            item_type = jsonObject.getString("item_type");
-            item_time = Integer.parseInt(jsonObject.getString("item_time"));
-            item_price = Float.parseFloat(jsonObject.getString("item_price"));
-            restaurant_id = Integer.parseInt(jsonObject.getString("restaurant_id"));
-            item_image = jsonObject.getString("item_image");
-            return show();
-        }catch(Exception e){
-            Log.d("InputStream", e.getLocalizedMessage());
-            return e.getLocalizedMessage();
-        }
-    }
 
     public void parseFromJson(JSONObject json){
         try {

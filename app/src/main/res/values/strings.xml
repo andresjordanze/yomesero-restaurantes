@@ -25,7 +25,6 @@
         <item>Bebida</item>
         <item>Postre</item>
     </string-array>
-    <string name="title_activity_main_activity2">MainActivity2Activity</string>
 
 
     <string name="title_section1">Section 1</string>
@@ -38,5 +37,5 @@
     <string name="title_activity_order_list">orderList</string>
     <string name="title_activity_show_order">ShowOrderActivity</string>
     <string name="title_activity_create_user">Registrar Usuario</string>
-
+    <string name="title_activity_show_cash">ShowCashActivity</string>
 </resources>

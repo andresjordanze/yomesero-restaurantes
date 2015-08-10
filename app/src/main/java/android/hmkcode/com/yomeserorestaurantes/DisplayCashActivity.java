@@ -1,8 +1,7 @@
 package android.hmkcode.com.yomeserorestaurantes;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -10,19 +9,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-
-public class MainActivity extends ActionBarActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
+/**
+ * Created by Andres on 10/08/2015.
+ */
+public class DisplayCashActivity extends ActionBarActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_display_cash);
 
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -33,14 +32,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        ActionBar.Tab tab = actionBar.newTab().setText("Comidas").setTabListener(this);
+        ActionBar.Tab tab = actionBar.newTab().setText("Por cobrar").setTabListener(this);
         actionBar.addTab(tab);
 
-        tab = actionBar.newTab().setText("Bebidas").setTabListener(this);
+        tab = actionBar.newTab().setText("Cobradas").setTabListener(this);
         actionBar.addTab(tab);
 
-        tab = actionBar.newTab().setText("Postres").setTabListener(this);
-        actionBar.addTab(tab);
 
         //ActionBar bar = getSupportActionBar();
         //bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#128371")));
@@ -50,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_display_cash, menu);
         return true;
     }
 
@@ -64,33 +61,21 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         //noinspection SimplifiableIfStatement
 
         if (id == R.id.action_log_out){
-            SaveSharedPreference.setUserId(MainActivity.this,"");
+            SaveSharedPreference.setUserId(DisplayCashActivity.this,"");
             Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
             startActivity(intent);
             finish();
         }
-
+        if (id == R.id.action_activity_main){
+            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+        }
         if (id == R.id.action_display_orders) {
             Intent intent = new Intent(getApplicationContext(), DisplayOrdersActivity.class);
             startActivity(intent);
         }
 
-        if (id == R.id.action_display_cash) {
-            Intent intent = new Intent(getApplicationContext(), DisplayCashActivity.class);
-            startActivity(intent);
-        }
-
-        if (id == R.id.action_create_user){
-            Intent intent = new Intent(getApplicationContext(),CreateUserActivity.class);
-            startActivity(intent);
-        }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    public void goToItemForm(View view){
-        Intent intent = new Intent(this, ItemFormActivity.class);
-        startActivity(intent);
     }
 
     public class PagerAdapter extends FragmentPagerAdapter {
@@ -102,17 +87,15 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new FragmentFood(getApplicationContext());
+                    return new FragmentReceivable(getApplicationContext());
                 case 1:
-                    return new FragmentDrink(getApplicationContext());
-                case 2:
-                    return new FragmentDessert(getApplicationContext());
+                    return new FragmentCashed(getApplicationContext());
                 default:
                     return null;
             }
         }
         public int getCount() {
-            return 3;
+            return 2;
         }
     }
 

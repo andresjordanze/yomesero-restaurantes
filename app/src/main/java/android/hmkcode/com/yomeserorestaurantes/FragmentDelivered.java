@@ -24,14 +24,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-public class FragmentEntr extends Fragment {
+public class FragmentDelivered extends Fragment {
     View rootView;
     Context context;
     ListView ordersListView;
     int current_rest;
     ArrayList<Order> orders;
 
-    public FragmentEntr(Context context){
+    public FragmentDelivered(Context context){
         this.context = context;
     }
 
@@ -57,8 +57,8 @@ public class FragmentEntr extends Fragment {
                         orders.add(aux);
                     }
                 }
-                MyOrdersAdapter myOrdersAdapter = new MyOrdersAdapter(context,orders);
-                ordersListView.setAdapter(myOrdersAdapter);
+                OrdersAdapter ordersAdapter = new OrdersAdapter(context,orders);
+                ordersListView.setAdapter(ordersAdapter);
                 ordersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

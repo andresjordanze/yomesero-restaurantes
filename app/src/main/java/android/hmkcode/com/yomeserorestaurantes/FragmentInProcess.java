@@ -2,24 +2,21 @@ package android.hmkcode.com.yomeserorestaurantes;
 
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,13 +24,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 
-public class FragmentDessert extends Fragment {
+public class FragmentInProcess extends Fragment {
     View rootView;
     Context context;
-    ListView itemsListView;
+    ListView ordersListView;
     int current_rest;
+    ArrayList<Order> orders;
 
-    public FragmentDessert(Context context){
+    public FragmentInProcess(Context context){
         this.context = context;
     }
 
@@ -49,18 +47,27 @@ public class FragmentDessert extends Fragment {
 
         protected void onPostExecute(String result){
             try {
-                JSONArray json_items = new JSONArray(result);
-                ArrayList<Item> items = new ArrayList<>();
-                Item aux;
-                for (int i = 0; i < json_items.length(); i++) {
-                    aux = new Item();
-                    aux.parseFromJson(json_items.getJSONObject(i));
-                    if (current_rest == aux.restaurant_id && aux.item_type.equals("Postre")){
-                        items.add(aux);
+                JSONArray json_orders = new JSONArray(result);
+                orders = new ArrayList<>();
+                Order aux;
+                for (int i = 0; i < json_orders.length(); i++) {
+                    aux = new Order();
+                    aux.parseFromJson(json_orders.getJSONObject(i));
+                    if (current_rest == aux.rest && aux.estado.equals("En Proceso")){
+                        orders.add(aux);
                     }
                 }
-                ItemsArrayAdapter itemsArrayAdapter = new ItemsArrayAdapter(context,items);
-                itemsListView.setAdapter(itemsArrayAdapter);
+                OrdersAdapter ordersAdapter = new OrdersAdapter(context,orders);
+                ordersListView.setAdapter(ordersAdapter);
+                ordersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(context, ShowOrderActivity.class);
+                        intent.putExtra("order", orders.get(position));
+                        startActivity(intent);
+                    }
+                });
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -95,18 +102,14 @@ public class FragmentDessert extends Fragment {
         return result;
     }
 
-    public void goToItemForm(View view){
-        Intent intent = new Intent(context, ItemFormActivity.class);
-        startActivity(intent);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_dessert, container, false);
-        itemsListView = (ListView) rootView.findViewById(R.id.itemsListView);
+        rootView = inflater.inflate(R.layout.fragment_fragment_entr, container, false);
+        ordersListView = (ListView) rootView.findViewById(R.id.ordersListView);
         current_rest = Integer.parseInt(SaveSharedPreference.getUserRest(this.context));
-        new HttpAsyncTask(context).execute("https://yomeseroserver.herokuapp.com/items.json");
+        new HttpAsyncTask(context).execute("https://yomeseroserver.herokuapp.com/ordens.json");
         return rootView;
     }
 
 }
+

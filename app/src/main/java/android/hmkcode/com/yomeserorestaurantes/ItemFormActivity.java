@@ -84,6 +84,11 @@ public class ItemFormActivity extends ActionBarActivity {
             startActivity(intent);
         }
 
+        if (id == R.id.action_display_cash) {
+            Intent intent = new Intent(getApplicationContext(), DisplayCashActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
